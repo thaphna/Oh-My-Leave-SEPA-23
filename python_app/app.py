@@ -5,8 +5,15 @@ from application.prediction_handler import predictionHandler
 from flask import Flask
 
 app = Flask("Oh-My-Leave")
+prdHandler = predictionHandler()
+
 
 @app.route('/')
 def home():
-    return "Hello World"
+	return "Hello World"
+
+@app.route('/test')
+def mockPrediction():
+	prdHandler.predictionPlantFromMock()
+	return "Good"
 

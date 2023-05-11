@@ -1,0 +1,7 @@
+birch
+coconut
+lotus
+maple
+oak
+pine
+poplar
