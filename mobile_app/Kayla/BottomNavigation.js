@@ -4,7 +4,7 @@ import styles from './styles.js'; // Update the path if necessary
 
 export default function App(){
   return (
-<view >
+
   <View style={[styles.fixToText, styles.bottomNavBox]}>
 
     <Pressable 
@@ -20,7 +20,7 @@ export default function App(){
       style={( { pressed } ) => {
         return { opacity: pressed ? 0.4 : 1 }
       }}>
-      <Image style={styles.bottomNavIcons} source={require('./images/Camera.png')} alt= {'Alternate text'} />  
+      <Image style={styles.bottomNavIcons} source={require('./images/camera.png')} alt= {'Alternate text'} />  
     </Pressable>
 
     <Pressable 
@@ -28,12 +28,11 @@ export default function App(){
       style={( { pressed } ) => {
         return { opacity: pressed ? 0.4 : 1 }
       }}>
-      <Image style={styles.bottomNavIcons} source={require('./images/Profile.png')} alt= {'Alternate text'} />  
+      <Image style={styles.bottomNavIcons} source={require('./images/profile.png')} alt= {'Alternate text'} />  
     </Pressable>
 
   </View>
 
-  </view> 
 
 
   ); 

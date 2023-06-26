@@ -5,24 +5,26 @@ import BottomNavigation from './BottomNavigation';
 import { View, Button, ImageBackground, Text, Image, Alert, Pressable, useWindowDimensions, SafeAreaView, TouchableOpacity } from 'react-native';
 import styles from './styles.js'; // Update the path if necessary
 
-function clickMe(){
-    alert('Youclicked me');
-}
+
 
 const HomePage = () => {
-  ;//const {height, width, scale, fontScale} = useWindowDimensions();
+//function HomePage({  }) {
+  //const {height, width, scale, fontScale} = useWindowDimensions();
+  //<View style={styles.container}>
   const size = useWindowDimensions();
   const width = size.width;
   const height = size.height;
   return (
  
-    <SafeAreaView style={styles.container}> 
-    <View style={styles.container}>
-
-    <ImageBackground source={require('./images/GreenBackground.png')} resizeMode="cover" style={styles.image}>
-  
+    //<SafeAreaView style={styles.container}> 
+    <ImageBackground source={require('./images/GreenBackground.png')} style={styles.image}>
+   
     
-    <view>
+
+    
+
+  
+      
     <Pressable 
       onPress={() => console.log("Settings button pressed")}
       style={( { pressed } ) => {
@@ -30,7 +32,7 @@ const HomePage = () => {
       }}>
       <Image style={styles.gearSettings} source={require('./images/settings.png')} alt= {'Alternate text'} />  
       </Pressable>
-    </view>
+    
 
   
     <View style={styles.banner}>
@@ -50,7 +52,7 @@ const HomePage = () => {
 
         <View style={styles.partBox}>
         <Image style={styles.smallImage} source={require('./images/collectionLeaf.png')}  />  
-        <Text style={styles.subtitle}>Date : 15 / 04 /23</Text>
+        <Text style={[styles.subtitle, styles.body]}>Date : 15 / 04 /23</Text>
         </View>
     
 
@@ -59,7 +61,7 @@ const HomePage = () => {
 
         <View style={styles.partBox}>
         <Image style={styles.smallImage} source={require('./images/healthLeaf.png')}  />  
-        <Text style={styles.subtitle}>Check Health</Text>
+        <Text style={[styles.subtitle, styles.body]}>Check Health</Text>
         </View>
       </View>
       </View> 
@@ -68,16 +70,17 @@ const HomePage = () => {
 
 
 
-    <view>
+    
     <View style={styles.fixToText}>
       <View style={{backgroundColor: 'green', flex: 0.3}} />
       <BottomNavigation onPress={() => console.log("YAY")}  />
       </View>
-    </view>
-    </ImageBackground>
+ 
+    
 
-  </View>
-  </SafeAreaView>
+
+  </ImageBackground>
+ // </SafeAreaView>
   );
 }
 

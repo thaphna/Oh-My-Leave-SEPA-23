@@ -5,12 +5,13 @@ import { StyleSheet } from 'react-native';
      container: {
        flex: 1,
        backgroundColor: '#F5F5F5',
-       width: 390,
+      // width: 390,
      },
      image: {
       flex: 1,
-      justifyContent: 'center',
-      height: 744,
+    //  justifyContent: 'center',
+    //  alignItems: 'center',
+      resizeMode: 'stretch',
      },
      title: {
        fontSize: 17,
@@ -22,31 +23,43 @@ import { StyleSheet } from 'react-native';
        color: 'black',
        fontWeight: 'bold',
      },
+     body:{
+      marginLeft: 8
+     },
      fixToText: {
       flexDirection: 'row',
       justifyContent: 'space-between',
     },
+    statBar: {
+      width: 390,
+      height: 44
+    },
     gearSettings: {
       width: 44,
       height: 44,
-      alignSelf: 'right',
+      //alignSelf: 'right',
       marginTop: 16,
-      marginBottom: 10
+      marginBottom: 10,
+      marginLeft: 330
     },
     profileIcon:{
       width: 74,
       height: 74
     },
     bottomNavIcons:{
-      width: 55,
-      height: 55,
+      width: 60,
+      height: 60,
     },
     bottomNavBox:{
       backgroundColor: 'green',
-      width: 390,
+     // width: 390,
+     //alignSelf: 'stretch',
       height: 82,
       alignItems: 'center',
-      justifyContent: 'space-around'
+      width: '100%',
+      justifyContent: 'space-around',
+      
+    
     },
     partBox:{
       backgroundColor: '#D9D9D9',
