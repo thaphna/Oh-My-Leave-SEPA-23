@@ -7,6 +7,7 @@ import ConfirmPicture from "../screens/ConfirmPicture";
 import Upload from "../screens/Upload";
 import HomePage from '../screens/HomePage';
 import Result from '../screens/Result';
+import Profile from '../screens/Profile';
 
 const Stack = createStackNavigator();
 
@@ -20,6 +21,7 @@ function Navigator() {
         <Stack.Screen name="ConfirmPicture" component={ConfirmPicture} options={{ headerShown: false }}/>
         <Stack.Screen name="Upload" component={Upload} options={{ headerShown: false}}/>
         <Stack.Screen name="Result" component={Result} options={{ headerShown: false}}/>
+        <Stack.Screen name="Profile" component={Profile} options={{ headerShown: false}}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
