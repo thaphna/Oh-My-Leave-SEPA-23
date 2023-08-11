@@ -14,6 +14,10 @@ export default function CameraPage({navigation}){
         navigation.navigate('CameraPage');
     };
 
+    const pressHandlerProfile = () => {
+        navigation.navigate('Profile');
+    };
+
   return (
     <ImageBackground source={require('../assets/GreenBackground.png')} style={styles.background}>
         <View style={styles.cube} />
@@ -35,7 +39,9 @@ export default function CameraPage({navigation}){
             <TouchableOpacity onPress={pressHandlerHomePage}>
                 <Image source={require('../assets/home.png')} style={styles.home}/>
             </TouchableOpacity>
-            <Image source={require('../assets/profile.png')} style={styles.profile}/>
+            <TouchableOpacity onPress={pressHandlerProfile}>
+                <Image source={require('../assets/profile.png')} style={styles.profile}/>
+            </TouchableOpacity>
         </View>
     </ImageBackground>
   );
@@ -135,8 +141,6 @@ const styles = StyleSheet.create({
         marginTop: 10,
         position: 'absolute'
     },
-
-
 
 });
 

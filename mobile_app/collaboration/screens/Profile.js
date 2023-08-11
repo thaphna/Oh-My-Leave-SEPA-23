@@ -1,7 +1,8 @@
 import React from 'react';
 import { StyleSheet,View, Button, ImageBackground, Text, Image, Alert, Pressable, useWindowDimensions, SafeAreaView, TouchableOpacity } from 'react-native';
 
-export default function HomePage({navigation}){
+export default function Profile({navigation}){
+
    const pressHandlerHomePage = () => {
     navigation.navigate('HomePage');
   };
@@ -9,10 +10,10 @@ export default function HomePage({navigation}){
   const pressHandlerCameraPage = () => {
       navigation.navigate('CameraPage');
   };
-
   const pressHandlerProfile = () => {
     navigation.navigate('Profile');
 };
+
 
     return (
       <ImageBackground source={require('../assets/GreenBackground.png')} style={styles.background}>
@@ -25,16 +26,16 @@ export default function HomePage({navigation}){
 
           <View style={styles.bar}>           
             <View style={styles.shape}>
-                <TouchableOpacity onPress={pressHandlerHomePage}>
-                    <Image source={require('../assets/home.png')} style={styles.home}/>
+                <TouchableOpacity onPress={pressHandlerProfile}>
+                    <Image source={require('../assets/profile.png')} style={styles.profile}/>
                 </TouchableOpacity>
-                <Text style={styles.name}>Home</Text>
+                <Text style={styles.name}>Profile</Text>
             </View>
             <TouchableOpacity onPress={pressHandlerCameraPage}>
                 <Image source={require('../assets/camera.png')} style={styles.camera1}/>
             </TouchableOpacity>
-            <TouchableOpacity onPress={pressHandlerProfile}>
-                <Image source={require('../assets/profile.png')} style={styles.profile}/>
+            <TouchableOpacity onPress={pressHandlerHomePage}>
+                <Image source={require('../assets/home.png')} style={styles.home}/>
             </TouchableOpacity>
         </View>
       </ImageBackground>
@@ -91,31 +92,32 @@ shape: {
   height: 120,
   borderRadius: 60, 
   backgroundColor: '#008000',
-  alignSelf: 'left',
+  alignSelf: 'flex-end',
   bottom: 5,
   position: 'absolute',
-  marginLeft: 28,
+  marginRight: 28,
 },
-home: {
-  width: 65,
-  height: 65,
-  marginLeft: 28,
+profile: {
+  width: 70,
+  height: 70,
+  marginLeft: 26,
   marginTop: 20,
   position: 'absolute'
 },
 name: {
   fontSize: 20,
   fontWeight: 'bold',
-  marginLeft: 32,
+  marginLeft: 33,
   marginTop: 85,
   position: 'absolute'
 },
-profile: {
+home: {
   width: 50,
   height: 50,
-  marginLeft: 310,
+  alignSelf: 'left',
   marginTop: 10,
-  position: 'absolute'
+  position: 'absolute',
+  marginLeft: 60,
 },
 camera1: {
   width: 55,

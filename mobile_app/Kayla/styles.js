@@ -37,10 +37,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     marginLeft: 330
   },
-  profileIcon:{
-    width: 74,
-    height: 74
-  },
+ 
   bottomNavIcons:{
     resizeMode:'contain', //fixes so image doesnt get cut off
     width: 60,
