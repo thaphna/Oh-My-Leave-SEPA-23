@@ -12,3 +12,10 @@ class predictionHandler:
     for img_name, img_data in img_dict.items():
       self.prdService.performPlantPrediction('model', img_name, img_data)
     return True
+  
+  def predictionPlantFromImage(self, img_bytes):
+    img_dict = self.storService.tensoriseImage(img_bytes)
+    for img_name, img_data in img_dict.items():
+      result = self.prdService.performPlantPrediction('model', img_name, img_data)
+    
+    return result
