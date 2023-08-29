@@ -1,41 +1,64 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import { View, Image, StyleSheet, ImageBackground, Text, TouchableOpacity } from 'react-native';
+import { RNCamera } from 'react-native-camera';
 
-export default function CameraTakingPicture({navigation}){
-     const pressHandlerCameraPage = () => {
-      navigation.navigate('CameraPage');
+export default function CameraTakingPicture({navigation}) {
+    const cameraRef = useRef(null);
+    const [capturedImage, setCapturedImage] = useState(null);
+
+    const pressHandlerCameraPage = () => {
+        navigation.navigate('CameraPage');
     };
 
-    const pressHandlerConfirmPage = () => {
-        navigation.navigate('ConfirmPicture');
+    const takePicture = async () => {
+        try {
+            if (cameraRef.current) {
+                const options = { quality: 0.5, base64: true };
+                const data = await cameraRef.current.takePictureAsync(options);
+                setCapturedImage(data.uri);
+                navigation.navigate('ConfirmPicture', { imageUri: data.uri });
+            }
+        } catch (error) {
+            console.error("Error capturing image:", error);
+        }
     };
 
-  return (
-    <ImageBackground style={styles.background}>
-        <Image source={require('../assets/leave1.jpg')} style={styles.leave}/>
-
-    <TouchableOpacity onPress={pressHandlerConfirmPage}>
-        <View style={styles.circle1}>
-            <View style={styles.circle2}>
-               <View style={styles.circle3}/>
-            </View>
-        </View>
-    </TouchableOpacity>
-
-        <Text style={styles.text1}>PHOTO</Text>
     
-    <TouchableOpacity onPress={pressHandlerCameraPage}>
-      <Text style={styles.text2}>Cancel</Text>
-    </TouchableOpacity>
+    return (
+        <ImageBackground style={styles.background}>
+            <RNCamera
+                ref={cameraRef}
+                style={styles.camera}
+                type={RNCamera.Constants.Type.back}
+                flashMode={RNCamera.Constants.FlashMode.on}
+            />
 
-    <TouchableOpacity onPress={pressHandlerConfirmPage}>
-      <Image source={require('../assets/gallery.png')} style={styles.gallery}/>
-    </TouchableOpacity>
+            <TouchableOpacity onPress={takePicture}>
+                <View style={styles.circle1}>
+                    <View style={styles.circle2}>
+                        <View style={styles.circle3} />
+                    </View>
+                </View>
+            </TouchableOpacity>
 
-    </ImageBackground>
- 
+            <Text style={styles.text1}>PHOTO</Text>
 
-  );
+            <TouchableOpacity onPress={pressHandlerCameraPage}>
+                <Text style={styles.text2}>Cancel</Text>
+            </TouchableOpacity>
+
+            {/* Commented out as the functionality might be misleading.
+            <TouchableOpacity onPress={takePicture}>
+                <Image source={require('../assets/gallery.png')} style={styles.gallery} />
+            </TouchableOpacity>
+            */}
+
+            {/* Display a preview of the captured image */}
+            {capturedImage && (
+                <Image source={{ uri: capturedImage }} style={styles.previewImage} />
+            )}
+        </ImageBackground>
+    );
 };
 
 const styles = StyleSheet.create({
@@ -102,10 +125,20 @@ const styles = StyleSheet.create({
         marginLeft: 310,
         marginTop: 70,
     },
-    
+    camera: {
+        flex: 1,
+        width: '100%',
+        aspectRatio: 1,
+        marginTop: 45,
+      },
 
+      previewImage: {
+        width: 100,  // Or any desired size
+        height: 100, // Or any desired size
+        marginTop: 10,
+        alignSelf: 'center',
+    },
 
-    
 
 
 

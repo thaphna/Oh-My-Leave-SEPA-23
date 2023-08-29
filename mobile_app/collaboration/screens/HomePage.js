@@ -17,9 +17,7 @@ export default function HomePage({navigation}){
     return (
       <ImageBackground source={require('../assets/GreenBackground.png')} style={styles.background}>
           <View style={styles.cube} />
-          <Image source={require('../assets/settings.png')} style={styles.settings} /> 
-
-
+          <Image source={require('../assets/settings.png')} style={styles.settings} />
 
 
 
