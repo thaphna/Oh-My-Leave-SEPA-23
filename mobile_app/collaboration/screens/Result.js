@@ -1,20 +1,40 @@
 import React from 'react';
-import { View, Image, StyleSheet, ImageBackground, Text, TouchableOpacity } from 'react-native';
+import { View, Image, StyleSheet, ImageBackground, Text, TouchableOpacity, ScrollView } from 'react-native';
 
-export default function Result({navigation}){
+export default function Result({navigation, route}){
+    const { resultBody } = route.params; 
+
     const pressHandlerTakingPicture = () => {
-      navigation.navigate('CameraTakingPicture');
-     };
+        navigation.navigate('CameraTakingPicture');
+    };
 
-     const pressHandlerHomePage = () => {
-      navigation.navigate('HomePage');
+    const pressHandlerHomePage = () => {
+        navigation.navigate('HomePage');
     };
 
     const pressHandlerCameraPage = () => {
         navigation.navigate('CameraPage');
     };
 
-  return (
+    const mapResultList = () => {
+        return resultBody.map((data) => {
+            return (
+                <View>
+                    <View style={{flexDirection: 'row'}}>
+                        <Text style={styles.text3}>{data.plantName}</Text>
+                        <Text style={styles.text3}>Confidence: {data.confidence}%</Text>
+                    </View>
+                    <View style={styles.box1}>
+                        <Image source={require('../assets/leave2.png')} style={styles.pic}/>
+                        <Image source={require('../assets/leave3.png')} style={styles.pic}/>
+                        <Image source={require('../assets/leave4.png')} style={styles.pic}/>
+                    </View>
+                </View>
+            )
+        })
+    }
+
+return (
     <ImageBackground source={require('../assets/GreenBackground.png')} style={styles.background}>
         <TouchableOpacity onPress={pressHandlerCameraPage}>
             <View style={styles.button}>
@@ -23,12 +43,9 @@ export default function Result({navigation}){
         </TouchableOpacity>
         <Text style={styles.text2}>Result</Text>
         <Image source={require('../assets/leave1.jpg')} style={styles.result}/>
-        <Text style={styles.text3}>Aristotelia Chilensis                                     Precise: 95%</Text>
-        <View style={styles.box1}>
-            <Image source={require('../assets/leave2.png')} style={styles.pic}/>
-            <Image source={require('../assets/leave3.png')} style={styles.pic}/>
-            <Image source={require('../assets/leave4.png')} style={styles.pic}/>
-        </View>
+        <ScrollView style={styles.scrollView}>
+            {mapResultList()}
+        </ScrollView>
     </ImageBackground>
   );
 };

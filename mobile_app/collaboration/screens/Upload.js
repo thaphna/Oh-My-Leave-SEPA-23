@@ -1,9 +1,34 @@
 import React, { useEffect } from 'react';
 import { View, Image, ActivityIndicator, StyleSheet, Text, ImageBackground } from 'react-native';
+import * as FS from "expo-file-system";
 
-export default function Upload({navigation}) {
+export default function Upload({navigation, route}) {
+  const { imageUri } = route.params; // Retrieve the image URI passed as a parameter
+
   useEffect(() => {
-    setTimeout(() => { navigation.navigate('Result'); }, 3000); }, [navigation]);
+    console.log("upload page")
+    //console.log(imageUri)
+    
+    const uploadImageForPrediction = async () => {
+      //replace below url with the actual EC2 url
+      let url = "https://26dc-121-200-5-225.ngrok-free.app/predict-plant";
+      let content_type = "image/jpeg";
+  
+      let response = await FS.uploadAsync(url, imageUri, {
+        headers: {
+          "content-type": content_type,
+        },
+        httpMethod: "POST",
+        uploadType: FS.FileSystemUploadType.BINARY_CONTENT,
+      });
+
+      navigation.navigate('Result', { resultBody: JSON.parse(response.body) });
+    };
+
+    uploadImageForPrediction();
+
+
+  }, [navigation]);
 
   return (
 
