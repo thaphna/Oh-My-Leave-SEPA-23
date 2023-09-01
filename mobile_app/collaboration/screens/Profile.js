@@ -20,10 +20,6 @@ export default function Profile({navigation}){
           <View style={styles.cube} />
           <Image source={require('../assets/settings.png')} style={styles.settings} /> 
 
-
-
-
-
           <View style={styles.bar}>           
             <View style={styles.shape}>
                 <TouchableOpacity onPress={pressHandlerProfile}>
@@ -92,15 +88,14 @@ shape: {
   height: 120,
   borderRadius: 60, 
   backgroundColor: '#008000',
-  alignSelf: 'flex-end',
   bottom: 5,
   position: 'absolute',
-  marginRight: 28,
+  marginLeft: 280,
 },
 profile: {
   width: 70,
   height: 70,
-  marginLeft: 26,
+  marginLeft: 25,
   marginTop: 20,
   position: 'absolute'
 },

@@ -1,30 +1,32 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import { View, Image, StyleSheet, ImageBackground, Text, TouchableOpacity } from 'react-native';
+import { ViewPropTypes } from 'deprecated-react-native-prop-types';
 
-export default function CameraTakingPicture({navigation}){
+
+export default function ConfirmPhoto({ navigation, route }) {
+    const { imageUri } = route.params; // Retrieve the image URI passed as a parameter
+    
     const pressHandlerTakingPicture = () => {
       navigation.navigate('CameraTakingPicture');
-     };
-
-     const pressHandlerUpload = () => {
+    };
+  
+    const pressHandlerUpload = () => {
       navigation.navigate('Upload');
     };
-
-  return (
-    <ImageBackground style={styles.background}>
-        <Image source={require('../assets/leave1.jpg')} style={styles.leave}/>
-
-    <TouchableOpacity onPress={pressHandlerTakingPicture}>
-        <Text style={styles.text1}>Retake</Text>
-    </TouchableOpacity>
-    
-    <TouchableOpacity onPress={pressHandlerUpload}>
-        <Text style={styles.text2}>Use Photo</Text>
-    </TouchableOpacity>
-    </ImageBackground>
- 
-
-  );
+  
+    return (
+      <ImageBackground style={styles.background}>
+          <Image source={{ uri: imageUri }} style={styles.leave}/>  {/* Use the captured image */}
+  
+        <TouchableOpacity onPress={pressHandlerTakingPicture}>
+          <Text style={styles.text1}>Retake</Text>
+        </TouchableOpacity>
+        
+        <TouchableOpacity onPress={pressHandlerUpload}>
+          <Text style={styles.text2}>Use Photo</Text>
+        </TouchableOpacity>
+      </ImageBackground>
+    );
 };
 
 const styles = StyleSheet.create({

@@ -3,7 +3,7 @@ import { View, Image, StyleSheet, ImageBackground, Text, TouchableOpacity } from
 
 export default function CameraPage({navigation}){
     const pressHandlerTakingPicture = () => {
-      navigation.navigate('CameraTakingPicture');
+      navigation.navigate('CameraFeature');
      };
 
      const pressHandlerHomePage = () => {
