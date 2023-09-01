@@ -1,6 +1,7 @@
 import tensorflow as tf
 import numpy as np
 import os.path
+from common.image_prediction_result import imagePredictionResult
 
 class imageClassificationService:	
 	def performPlantPrediction(self, model_name, img_name, img_data):
@@ -24,6 +25,12 @@ class imageClassificationService:
 			img_name + " most likely belongs to {} with a {:.2f} percent confidence."
 			.format(model_label_map[np.argmax(score_lite)], 100 * np.max(score_lite))
 		)
+
+		prediction_result = []
 		print("All scores: ")
 		for indexScore, score in enumerate(score_lite[0]):
 			print("{}: {:.2f}".format(model_label_map[indexScore], 100 * np.max(score)))
+			prediction_result.append(imagePredictionResult(plantName=model_label_map[indexScore], plantDescription='', confidence=100 * np.max(score)))
+		
+		#print(prediction_result)
+		return prediction_result
