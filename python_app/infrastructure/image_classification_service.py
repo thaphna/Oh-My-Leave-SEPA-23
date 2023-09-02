@@ -30,7 +30,7 @@ class imageClassificationService:
 		print("All scores: ")
 		for indexScore, score in enumerate(score_lite[0]):
 			print("{}: {:.2f}".format(model_label_map[indexScore], 100 * np.max(score)))
-			prediction_result.append(imagePredictionResult(plantName=model_label_map[indexScore], plantDescription='', confidence=100 * np.max(score)))
+			prediction_result.append(imagePredictionResult(plantName=model_label_map[indexScore], plantId='', confidence=100 * np.max(score)))
 		
 		#print(prediction_result)
 		return prediction_result

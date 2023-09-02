@@ -1,7 +1,7 @@
 class imagePredictionResult:
-    def __init__(self, plantName, plantDescription, confidence):
+    def __init__(self, plantId, plantName, confidence):
+        self.plantId = plantId
         self.plantName = plantName
-        self.plantDescription = plantDescription
         self.confidence = confidence
 
     

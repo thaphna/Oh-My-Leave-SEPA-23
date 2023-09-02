@@ -10,7 +10,11 @@ import { style } from 'deprecated-react-native-prop-types/DeprecatedImagePropTyp
 export default function CameraFeature({navigation}){
     const pressHandlerCameraPage = () => {
         navigation.navigate('CameraPage');
-      };
+    };
+
+    const handlerUploadPage = (route) => {
+        navigation.navigate('Upload', route);
+    };
 
     const [hasCameraPermission, setHasCameraPermission] = useState(null);
     const [image, setImage] = useState(null);
@@ -44,14 +48,17 @@ export default function CameraFeature({navigation}){
         if(image) {
             try {
                 const asset = await MediaLibrary.createAssetAsync(image);
-                alert('Saved');
+                //alert('Saved');
                 setImage(null);
                 console.log('Saved Successfully');
+                handlerUploadPage({ imageUri: asset.uri });
             } catch (error) {
                 console.log(error);
             }
         }
     };
+
+    
 
     const pickImage = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({
@@ -63,9 +70,12 @@ export default function CameraFeature({navigation}){
     
         console.log(result);
     
+        //do we really need to save to phone gallery again on an image we selected and crop?
         if (!result.cancelled) {
             setImage(result.uri);
         }
+
+        handlerUploadPage({ imageUri: result.uri });
     };
 
     if (hasCameraPermission === false) {

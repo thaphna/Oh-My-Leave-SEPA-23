@@ -19,6 +19,8 @@ function Navigator() {
       <Stack.Navigator>
         <Stack.Screen name="CameraPage" component={CameraPage} options={{ headerShown: false }} />
         <Stack.Screen name="CameraFeature" component={CameraFeature} options={{ headerShown: false }}/>
+        <Stack.Screen name="Result" component={Result} options={{ headerShown: false}}/>
+        <Stack.Screen name="Upload" component={Upload} options={{ headerShown: false}}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
