@@ -1,4 +1,3 @@
-from application.authentication_handler import authenticationHandler
 from application.collection_handler import collectionHandler
 from application.leaderboard_handler import leaderboardHandler
 from application.prediction_handler import predictionHandler
@@ -22,7 +21,8 @@ def mockPrediction():
 def imagePrediction():
     if(request.method == "POST"):
         bytesOfImage = request.get_data()
-        results = prdHandler.predictionPlantFromImage(bytesOfImage)
+        modelName = request.headers['model']
+        results = prdHandler.predictionPlantFromImage(bytesOfImage, modelName)
         return json.dumps(results, default=lambda o: o.__dict__, sort_keys=True, indent=4)
     
 

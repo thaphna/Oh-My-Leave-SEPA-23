@@ -17,18 +17,19 @@ export default function Result({navigation, route}){
     };
 
     const mapResultList = () => {
+        //console.log(resultBody)
         return resultBody.map((data) => {
             return (
                 <View>
                     <View style={{flexDirection: 'row'}}>
                         <Text style={styles.text3}>{data.plantName}</Text>
-                        <Text style={styles.text3}>Confidence: {data.confidence}%</Text>
+                        <Text style={styles.text4}>Confidence: {data.confidence}%</Text>
                     </View>
-                    <View style={styles.box1}>
-                        <Image source={require('../assets/leave2.png')} style={styles.pic}/>
-                        <Image source={require('../assets/leave3.png')} style={styles.pic}/>
-                        <Image source={require('../assets/leave4.png')} style={styles.pic}/>
-                    </View>
+                        <ScrollView style={styles.scrollViewCustom} horizontal={true}>
+                            <Image source={require('../assets/leave2.png')} style={styles.pic}/>
+                            <Image source={require('../assets/leave3.png')} style={styles.pic}/>
+                            <Image source={require('../assets/leave4.png')} style={styles.pic}/>
+                        </ScrollView>                               
                 </View>
             )
         })
@@ -41,32 +42,46 @@ return (
                 <Text style={styles.text1}>BACK</Text>
             </View>
         </TouchableOpacity>
-        <Text style={styles.text2}>Result</Text>
-        <Image source={require('../assets/leave1.jpg')} style={styles.result}/>
-        <ScrollView style={styles.scrollView}>
-            {mapResultList()}
-        </ScrollView>
+        <View style={styles.resultHeading}> 
+            <Text style={styles.text2}>Result</Text>
+            { resultBody.length > 0 &&
+                <Image source={require('../assets/leave1.jpg')} style={styles.result}/>
+            }           
+        </View>
+        { resultBody.length > 0 &&
+            <View>
+                <ScrollView style={styles.scrollView}>
+                    {mapResultList()}
+                </ScrollView>
+            </View>
+        }
+        { resultBody.length <= 0 &&
+            <Text style={styles.text3}>The image could not be successfully classified.</Text>
+        }
+        
+        
     </ImageBackground>
   );
 };
 
 const styles = StyleSheet.create({
-
+    resultHeading: {
+        flexDirection: 'row',
+    },
     container: {
         flex: 1,
         backgroundColor: '#F5F5F5',
     },
     background: {
         flex: 1,
-        resizeMode: 'stretch',
+        resizeMode: 'stretch'
     },
     button: {
         width: 75,
         height: 40,
         backgroundColor: "#B1F2B3",
         marginTop: 40,
-        marginLeft: 25,
-        position: 'absolute',
+        marginLeft: 25
     },
     text1: {
         color: 'black',
@@ -79,22 +94,29 @@ const styles = StyleSheet.create({
         color: 'black',
         fontWeight: 'bold',
         fontSize: 40,
-        marginTop: 120,
-        marginLeft: 25,
-        position: 'absolute',
-    },
-    result: {
-        height: 120,
-        width: 170, 
-        marginTop: 100,
-        marginLeft: 200,
+        marginTop: 30,
+        marginLeft: 25
     },
     text3: {
         color: 'black',
         fontWeight: 'bold',
         fontSize: 15,
-        marginLeft: 20,
+        marginLeft: 30,
         marginTop: 25,
+        flex: 2
+    },
+    text4: {
+        color: 'black',
+        fontWeight: 'bold',
+        fontSize: 15,
+        marginTop: 25,
+        marginRight: 10
+    },
+    result: {
+        height: 120,
+        width: 170, 
+        marginTop: 0,
+        marginLeft: 20
     },
     box1: {
         height: 110,
@@ -109,8 +131,12 @@ const styles = StyleSheet.create({
         width: 120,
         height: 100,
         marginTop: 5,
+        marginRight: 5
     },
-
+    scrollViewCustom: {
+        marginLeft: 30,
+        marginTop: 10
+    }
 
 
 
