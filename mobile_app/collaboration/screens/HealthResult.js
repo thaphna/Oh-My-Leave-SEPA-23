@@ -10,10 +10,8 @@ export default function HealthResult({navigation, route}){
 
 return (
     <ImageBackground source={require('../assets/GreenBackground.png')} style={styles.background}>
-        <TouchableOpacity onPress={pressHandlerHomePage}>
-            <View style={styles.button}>
-                <Text style={styles.text1}>BACK</Text>
-            </View>
+        <TouchableOpacity onPress={pressHandlerHomePage} style={styles.button}>
+            <Text style={styles.text1}>BACK</Text>
         </TouchableOpacity>
         <Text style={styles.text2}>Health Diagnosis</Text>
         <Image source={require('../assets/leave1.jpg')} style={styles.pic}/>
@@ -28,6 +26,7 @@ return (
                 <Text style={styles.unhealthyText}>Unhealthy</Text>
             </View>
         }
+        <Text style={styles.text3}>Confidence: {resultBody[0].confidence}</Text>
     </ImageBackground>
   );
 };
