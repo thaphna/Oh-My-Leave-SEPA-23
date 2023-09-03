@@ -25,3 +25,10 @@ class predictionHandler:
     filteredResult = list(filter(lambda x: x.confidence > 50, result))
     
     return sorted(filteredResult, key = lambda x : x.confidence, reverse = True)[:5]
+  
+  def healthCheckFromImage(self, img_bytes, modelName):
+    img_dict = self.storService.tensoriseImage(img_bytes)
+    for img_name, img_data in img_dict.items():
+      result = self.prdService.performPlantPrediction(modelName, img_name, img_data)
+    
+    return sorted(result, key = lambda x : x.confidence, reverse = True)

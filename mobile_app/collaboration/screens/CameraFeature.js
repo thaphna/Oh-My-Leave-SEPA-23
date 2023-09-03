@@ -7,7 +7,9 @@ import * as ImagePicker from 'expo-image-picker'
 import Button from './Button';
 import { style } from 'deprecated-react-native-prop-types/DeprecatedImagePropType';
 
-export default function CameraFeature({navigation}){
+export default function CameraFeature({navigation, route}){
+    const { cameraMode } = route.params; 
+
     const pressHandlerCameraPage = () => {
         navigation.navigate('CameraPage');
     };
@@ -51,7 +53,7 @@ export default function CameraFeature({navigation}){
                 //alert('Saved');
                 setImage(null);
                 console.log('Saved Successfully');
-                handlerUploadPage({ imageUri: asset.uri });
+                handlerUploadPage({ imageUri: asset.uri, cameraMode: cameraMode });
             } catch (error) {
                 console.log(error);
             }
@@ -75,7 +77,7 @@ export default function CameraFeature({navigation}){
             setImage(result.uri);
         }
 
-        handlerUploadPage({ imageUri: result.uri });
+        handlerUploadPage({ imageUri: result.uri, cameraMode: cameraMode });
     };
 
     if (hasCameraPermission === false) {

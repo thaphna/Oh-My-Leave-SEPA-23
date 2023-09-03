@@ -1,9 +1,10 @@
 import React from 'react';
 import { View, Image, StyleSheet, ImageBackground, Text, TouchableOpacity } from 'react-native';
+import { CameraModeEnum } from '../common/CameraModeEnum';
 
 export default function CameraPage({navigation}){
     const pressHandlerTakingPicture = () => {
-        navigation.navigate('CameraFeature');
+        navigation.navigate('CameraFeature', { cameraMode: CameraModeEnum.Prediction });
     };
 
     const pressHandlerHomePage = () => {
@@ -20,7 +21,7 @@ export default function CameraPage({navigation}){
 
     const pressHandlerSettings = () => {
         navigation.navigate('Settings');
-    }
+    };
 
   return (
     <ImageBackground source={require('../assets/GreenBackground.png')} style={styles.background}>

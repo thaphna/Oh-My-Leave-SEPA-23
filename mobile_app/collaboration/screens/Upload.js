@@ -2,13 +2,21 @@ import React, { useEffect } from 'react';
 import { View, Image, ActivityIndicator, StyleSheet, Text, ImageBackground } from 'react-native';
 import * as FS from "expo-file-system";
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { CameraModeEnum } from '../common/CameraModeEnum';
 
 export default function Upload({navigation, route}) {
   const { imageUri } = route.params; // Retrieve the image URI passed as a parameter
+  const { cameraMode } = route.params; 
+  
+  //replace below url with the actual EC2 url
+  const url = "https://d1cb-121-200-5-225.ngrok-free.app/"
+  const content_type = "image/jpeg";
 
   useEffect(() => {
     console.log("upload page")
     //console.log(imageUri)
+    console.log("image url " + imageUri)
+    console.log("camera mode " + cameraMode)
 
     const uploadImageForPrediction = async (storeKey, setValue) => {
       //get saved model name. If none selected yet, default to something
@@ -29,11 +37,9 @@ export default function Upload({navigation, route}) {
 
       console.log("get saved  " + selectedModelName) 
 
-      //replace below url with the actual EC2 url
-      let url = "https://16e7-121-200-5-225.ngrok-free.app/predict-plant";
-      let content_type = "image/jpeg";
+      let fullUrl = url + "predict-plant";
   
-      let response = await FS.uploadAsync(url, imageUri, {
+      let response = await FS.uploadAsync(fullUrl, imageUri, {
         headers: {
           "content-type": content_type,
           "model": selectedModelName
@@ -45,9 +51,28 @@ export default function Upload({navigation, route}) {
       navigation.navigate('Result', { resultBody: JSON.parse(response.body) });
     };
 
-    uploadImageForPrediction('SelectedModel', 'summer');
+    const uploadImageForHealthCheck = async () => {
+      let fullUrl = url + "health-check";
+  
+      let response = await FS.uploadAsync(fullUrl, imageUri, {
+        headers: {
+          "content-type": content_type,
+          "model": "health"
+        },
+        httpMethod: "POST",
+        uploadType: FS.FileSystemUploadType.BINARY_CONTENT,
+      });
 
-
+      console.log(response.body)
+      navigation.navigate('HealthResult', { resultBody: JSON.parse(response.body) });
+    };
+    
+    if (cameraMode === CameraModeEnum.Prediction) {
+      uploadImageForPrediction('SelectedModel', 'summer');
+    }
+    else {
+      uploadImageForHealthCheck();
+    }
   }, [navigation]);
 
   return (
