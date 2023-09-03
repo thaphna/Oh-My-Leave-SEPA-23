@@ -37,10 +37,8 @@ export default function Result({navigation, route}){
 
 return (
     <ImageBackground source={require('../assets/GreenBackground.png')} style={styles.background}>
-        <TouchableOpacity onPress={pressHandlerCameraPage}>
-            <View style={styles.button}>
-                <Text style={styles.text1}>BACK</Text>
-            </View>
+        <TouchableOpacity onPress={pressHandlerCameraPage}  style={styles.button}>
+            <Text style={styles.text1}>BACK</Text>
         </TouchableOpacity>
         <View style={styles.resultHeading}> 
             <Text style={styles.text2}>Result</Text>
