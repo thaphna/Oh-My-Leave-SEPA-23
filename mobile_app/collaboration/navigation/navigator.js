@@ -1,5 +1,6 @@
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
+import React from 'react';
 
 import CameraPage from "../screens/CameraPage";
 import CameraTakingPicture from "../screens/CameraTakingPicture";
@@ -10,6 +11,8 @@ import Result from '../screens/Result';
 import Profile from '../screens/Profile';
 import testCamera from '../screens/testCamera';
 import CameraFeature from '../screens/CameraFeature';
+import Settings from '../screens/Settings';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Stack = createStackNavigator();
 
@@ -21,6 +24,7 @@ function Navigator() {
         <Stack.Screen name="CameraFeature" component={CameraFeature} options={{ headerShown: false }}/>
         <Stack.Screen name="Result" component={Result} options={{ headerShown: false}}/>
         <Stack.Screen name="Upload" component={Upload} options={{ headerShown: false}}/>
+        <Stack.Screen name="Settings" component={Settings} options={{ headerShown: false}}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

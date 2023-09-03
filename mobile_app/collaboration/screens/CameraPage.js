@@ -3,11 +3,11 @@ import { View, Image, StyleSheet, ImageBackground, Text, TouchableOpacity } from
 
 export default function CameraPage({navigation}){
     const pressHandlerTakingPicture = () => {
-      navigation.navigate('CameraFeature');
-     };
+        navigation.navigate('CameraFeature');
+    };
 
-     const pressHandlerHomePage = () => {
-      navigation.navigate('HomePage');
+    const pressHandlerHomePage = () => {
+        navigation.navigate('HomePage');
     };
 
     const pressHandlerSelf = () => {
@@ -18,27 +18,35 @@ export default function CameraPage({navigation}){
         navigation.navigate('Profile');
     };
 
+    const pressHandlerSettings = () => {
+        navigation.navigate('Settings');
+    }
+
   return (
     <ImageBackground source={require('../assets/GreenBackground.png')} style={styles.background}>
-        <View style={styles.cube} />
-        <Image source={require('../assets/settings.png')} style={styles.settings} /> 
+        <TouchableOpacity onPress={pressHandlerSettings}>
+            <View style={styles.cube}>
+                <Image source={require('../assets/settings.png')} style={styles.settings}/>  
+            </View>            
+        </TouchableOpacity>
         <Image source={require('../assets/leave.png')} style={styles.logo}/>
         <TouchableOpacity onPress={pressHandlerTakingPicture}>
-            <View style={styles.circle} />
-            <Image source={require('../assets/camera.png')} style={styles.camera}/>  
+            <View style={styles.circle}>
+                <Image source={require('../assets/camera.png')} style={styles.camera}/>  
+            </View>            
         </TouchableOpacity>
 
     
-        <View style={styles.bar}>           
+        <View style={styles.bar}>   
+            <TouchableOpacity onPress={pressHandlerHomePage}>
+                <Image source={require('../assets/home.png')} style={styles.home}/>
+            </TouchableOpacity>        
             <View style={styles.shape}>
                 <TouchableOpacity onPress={pressHandlerSelf}>
                     <Image source={require('../assets/camera.png')} style={styles.camera1}/>
                 </TouchableOpacity>
                 <Text style={styles.name}>Camera</Text>
             </View>
-            <TouchableOpacity onPress={pressHandlerHomePage}>
-                <Image source={require('../assets/home.png')} style={styles.home}/>
-            </TouchableOpacity>
             <TouchableOpacity onPress={pressHandlerProfile}>
                 <Image source={require('../assets/profile.png')} style={styles.profile}/>
             </TouchableOpacity>
@@ -60,41 +68,38 @@ const styles = StyleSheet.create({
     logo: {
         width: 250,
         height: 250,
-        marginLeft: 85,
-        marginTop: 100,
-        position: 'absolute'
+        alignSelf: 'center',
+        flexDirection: 'row'
     },
     circle: {
         width: 200, 
         height: 200,
         borderRadius: 100, 
         backgroundColor: '#D9D9D9',
-        marginLeft: 110,
-        marginTop: 340,
-        position: 'absolute'
+        alignSelf: 'center',
+        flexDirection: 'row',
+        justifyContent: 'center'
     },
     camera: {
         width: 120,
         height: 100,
-        marginLeft: 150,
-        marginTop: 385, 
-        position: 'absolute'      
+        alignSelf: 'center'
     },
     cube: {
         width: 40,
         height: 40,
         backgroundColor: "#ffffff",
         borderRadius: 10,
-        marginLeft: 350,
         marginTop: 50,
-        position: 'absolute'
+        marginEnd: 20,
+        alignSelf: 'flex-end',
+        flexDirection: 'row',
+        justifyContent: 'center'
     },
     settings: {
         width: 25,
         height: 25,
-        marginLeft: 357,
-        marginTop: 57,
-        position: 'absolute'
+        alignSelf: 'center'
     },
     bar: {
         width: '100%',
@@ -102,7 +107,10 @@ const styles = StyleSheet.create({
         backgroundColor: '#008000',
         marginTop: '200%',
         bottom: 0,
-        position: 'absolute'
+        position: 'absolute',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center'
     },
     shape: {
         width: 120, 
@@ -110,38 +118,34 @@ const styles = StyleSheet.create({
         borderRadius: 60, 
         backgroundColor: '#008000',
         alignSelf: 'center',
-        bottom: 5,
-        position: 'absolute'
+        bottom: 5
     },
     camera1: {
         width: 70,
         height: 55,
         marginLeft: 25,
-        marginTop: 30,
+        marginTop: 15,
         position: 'absolute'
     },
     name: {
         fontSize: 20,
         fontWeight: 'bold',
         marginLeft: 25,
-        marginTop: 85,
+        marginTop: 75,
         position: 'absolute'
     },
     profile: {
         width: 50,
         height: 50,
-        marginLeft: 310,
-        marginTop: 10,
-        position: 'absolute'
+        marginLeft: 25,
+        alignSelf: 'flex-end'
     },
     home: {
         width: 45,
         height: 45,
-        marginLeft: 60,
-        marginTop: 10,
-        position: 'absolute'
+        marginRight: 25,
+        alignSelf: 'flex-start'
     },
-
 });
 
 
