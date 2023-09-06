@@ -14,6 +14,9 @@ import CameraFeature from '../screens/CameraFeature';
 import Settings from '../screens/Settings';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import HealthResult from '../screens/HealthResult';
+import LogIn from "../screens/LogIn";
+import SignUp from "../screens/SignUp";
+
 
 const Stack = createStackNavigator();
 
@@ -21,8 +24,14 @@ function Navigator() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
+<Stack.Screen name="LogIn" component={LogIn} options={{ headerShown: false }} />
+      <Stack.Screen name="HomePage" component={HomePage} options={{ headerShown: false }} />
+
+      <Stack.Screen name="SignUp" component={SignUp} options={{ headerShown: false }} />
+
+
         <Stack.Screen name="CameraPage" component={CameraPage} options={{ headerShown: false }} />
-        <Stack.Screen name="HomePage" component={HomePage} options={{ headerShown: false }} />
+       
         <Stack.Screen name="CameraFeature" component={CameraFeature} options={{ headerShown: false }}/>
         <Stack.Screen name="Result" component={Result} options={{ headerShown: false}}/>
         <Stack.Screen name="HealthResult" component={HealthResult} options={{ headerShown: false}}/>
