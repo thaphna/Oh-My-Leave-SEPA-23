@@ -10,7 +10,7 @@ export default function HealthResult({navigation, route}){
     };
 
 return (
-    <ImageBackground source={require('../assets/GreenBackground.png')} style={styles.background}>
+    <ImageBackground source={require('../../assets/GreenBackground.png')} style={styles.background}>
         <TouchableOpacity onPress={pressHandlerHomePage} style={styles.button}>
             <Text style={styles.text1}>BACK</Text>
         </TouchableOpacity>
