@@ -27,9 +27,9 @@ export default function Result({navigation, route}){
                         <Text style={styles.text4}>Confidence: {data.confidence}%</Text>
                     </View>
                         <ScrollView style={styles.scrollViewCustom} horizontal={true}>
-                            <Image source={require('../assets/leave2.png')} style={styles.pic}/>
-                            <Image source={require('../assets/leave3.png')} style={styles.pic}/>
-                            <Image source={require('../assets/leave4.png')} style={styles.pic}/>
+                            <Image source={require('../../assets/leave2.png')} style={styles.pic}/>
+                            <Image source={require('../../assets/leave3.png')} style={styles.pic}/>
+                            <Image source={require('../../assets/leave4.png')} style={styles.pic}/>
                         </ScrollView>                               
                 </View>
             )
@@ -37,7 +37,7 @@ export default function Result({navigation, route}){
     }
 
 return (
-    <ImageBackground source={require('../assets/GreenBackground.png')} style={styles.background}>
+    <ImageBackground source={require('../../assets/GreenBackground.png')} style={styles.background}>
         <TouchableOpacity onPress={pressHandlerCameraPage}  style={styles.button}>
             <Text style={styles.text1}>BACK</Text>
         </TouchableOpacity>

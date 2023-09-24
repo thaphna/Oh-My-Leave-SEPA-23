@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
         width: 75,
         height: 40,
         backgroundColor: "#B1F2B3",
-        marginTop: 40,
+        marginTop: 100,
         marginLeft: 25
     },
     text1: {
