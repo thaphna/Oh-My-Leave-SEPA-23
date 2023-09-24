@@ -9,7 +9,7 @@ export default function Upload({navigation, route}) {
   const { cameraMode } = route.params; 
   
   //replace below url with the actual EC2 url
-  const url = "https://d1cb-121-200-5-225.ngrok-free.app/"
+  const url = "https://b7de-121-200-5-225.ngrok-free.app/"
   const content_type = "image/jpeg";
 
   useEffect(() => {
@@ -48,7 +48,8 @@ export default function Upload({navigation, route}) {
         uploadType: FS.FileSystemUploadType.BINARY_CONTENT,
       });
 
-      navigation.navigate('Result', { resultBody: JSON.parse(response.body) });
+      console.log(JSON.parse(response.body))
+      navigation.navigate('Result', { resultBody: JSON.parse(response.body), imageUri: imageUri });
     };
 
     const uploadImageForHealthCheck = async () => {
@@ -64,7 +65,7 @@ export default function Upload({navigation, route}) {
       });
 
       console.log(response.body)
-      navigation.navigate('HealthResult', { resultBody: JSON.parse(response.body) });
+      navigation.navigate('HealthResult', { resultBody: JSON.parse(response.body), imageUri: imageUri });
     };
     
     if (cameraMode === CameraModeEnum.Prediction) {

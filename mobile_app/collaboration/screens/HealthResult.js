@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Image, StyleSheet, ImageBackground, Text, TouchableOpacity, ScrollView } from 'react-native';
 
 export default function HealthResult({navigation, route}){
+    const { imageUri } = route.params; // Retrieve the image URI passed as a parameter
     const { resultBody } = route.params; 
 
     const pressHandlerHomePage = () => {
@@ -14,18 +15,29 @@ return (
             <Text style={styles.text1}>BACK</Text>
         </TouchableOpacity>
         <Text style={styles.text2}>Health Diagnosis</Text>
-        <Image source={require('../assets/leave1.jpg')} style={styles.pic}/>
-        
-        { resultBody[0].plantName === 'healthy' &&
-            <View style={styles.healthyBox}>
-                <Text style={styles.healthyText}>Healthy</Text>
-            </View>
-        }
-        { resultBody[0].plantName === 'unhealthy' &&
-            <View style={styles.unhealthyBox}>
-                <Text style={styles.unhealthyText}>Unhealthy</Text>
-            </View>
-        }
+        <Image source={{uri: imageUri}} style={styles.pic}/>
+        <View style={styles.resultBox}>
+            { resultBody[0].plantName === 'healthy' &&
+                <View style={styles.healthyBox}>
+                    { resultBody[0].confidence >= 75 &&
+                        <Text style={styles.healthText}>Very Healthy</Text>
+                    }
+                    { resultBody[0].confidence < 75 &&
+                        <Text style={styles.healthText}>Healthy</Text>
+                    }
+                </View>
+            }
+            { resultBody[0].plantName === 'unhealthy' &&
+                <View style={styles.unhealthyBox}>
+                    { resultBody[0].confidence >= 75 &&
+                        <Text style={styles.healthText}>Very Unhealthy</Text>
+                    }
+                    { resultBody[0].confidence < 75 &&
+                        <Text style={styles.healthText}>Unhealthy</Text>
+                    }
+                </View>
+            }
+        </View>        
         <Text style={styles.text3}>Confidence: {resultBody[0].confidence}</Text>
     </ImageBackground>
   );
@@ -34,21 +46,30 @@ return (
 const styles = StyleSheet.create({
     healthyBox: {
         backgroundColor: '#aefcba',
-        height: 79,
-        marginRight: 25,
-        marginLeft: 25,
-        marginTop: 10,
-        marginBottom: 10,
+        marginTop: 20,
+        borderRadius: 10,
         alignItems: 'center',
+        alignContent: 'center',
+        alignSelf: 'center'
     },
     unhealthyBox: {
         backgroundColor: '#f7b2ad',
-        height: 79,
+        marginTop: 20,
+        borderRadius: 10,
+        alignItems: 'center',
+        alignContent: 'center',
+        alignSelf: 'center'
+    },
+    resultBox: {
+        backgroundColor: '#D9D9D9',
         marginRight: 25,
         marginLeft: 25,
         marginTop: 10,
         marginBottom: 10,
+        height: 100,
+        alignContent: 'center',
         alignItems: 'center',
+        flexDirection: 'column'
     },
     resultHeading: {
         flexDirection: 'row',
@@ -90,17 +111,14 @@ const styles = StyleSheet.create({
         marginTop: 25,
         flex: 2
     },
-    healthyText: {
-        color: 'green',
+    healthText: {
+        color: 'black',
         fontWeight: 'bold',
         fontSize: 25,
-        marginTop: 20
-    },
-    unhealthyText: {
-        color: 'red',
-        fontWeight: 'bold',
-        fontSize: 25,
-        marginTop: 20
+        marginRight: 10,
+        marginLeft: 10,
+        marginTop: 10,
+        marginBottom: 10
     },
     result: {
         height: 120,
@@ -120,7 +138,7 @@ const styles = StyleSheet.create({
     pic: {
         alignSelf: 'center',
         height: 200,
-        width: 250,
+        width: 290,
         marginTop: 25
     },
     scrollViewCustom: {

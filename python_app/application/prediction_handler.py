@@ -23,6 +23,9 @@ class predictionHandler:
       item.plantName = item.plantName.capitalize()
 
     filteredResult = list(filter(lambda x: x.confidence > 50, result))
+
+    if len(filteredResult) <= 0:
+      return [max(result, key = lambda x : x.confidence)]
     
     return sorted(filteredResult, key = lambda x : x.confidence, reverse = True)[:5]
   
