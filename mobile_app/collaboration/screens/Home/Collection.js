@@ -28,9 +28,9 @@ export default function HomePage({ navigation }) {
     return (
         <ImageBackground source={require('../../assets/GreenBackground.png')} style={styles.background}>
             <View style={styles.mainContent}>
-                <Pressable style={styles.backButton} onPress={handleBackPress}>
+                <TouchableOpacity style={styles.backButton} onPress={handleBackPress}>
                     <Text style={styles.backButtonText}>BACK</Text>
-                </Pressable>
+                </TouchableOpacity>
                 <View style={styles.contents}>
                     <View style={styles.collection}>
                         <Text style={styles.title}>Collection</Text>
@@ -60,24 +60,22 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     contents: {
-        alignItems: 'center',
-        marginTop: 100,
+    },
+    
+    backButton: {
+        width: 75,
+        height: 40,
+        backgroundColor: "#B1F2B3",
+        marginTop: 40,
+        marginLeft: 25
     },
 
-    backButton: {
-        height: 50,
-        width: 90,
-        paddingTop: 13,
-        paddingLeft: 18,
-        borderRadius: 5,
-        backgroundColor: '#B1F2B3', 
-        marginTop: 70,
-        marginLeft: 25,
-    },
     backButtonText: {
-        fontSize: 20,
-        fontWeight: 'bold',
         color: 'black',
+        fontWeight: 'bold',
+        fontSize: 20,
+        alignSelf: 'center',
+        marginTop: 5,
     },
 
 
@@ -94,6 +92,7 @@ const styles = StyleSheet.create({
         color: 'black',
         fontWeight: 'bold',
         marginBottom: 15,
+        marginLeft: 10
     },
 
     body: {

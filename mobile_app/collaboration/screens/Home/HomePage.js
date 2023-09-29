@@ -18,7 +18,7 @@ export default function HomePage({ navigation }) {
     navigation.navigate('Settings');
   };
   const pressHandlerHealth = () => {
-    navigation.navigate('CameraFeature', { cameraMode: CameraModeEnum.Prediction });
+    navigation.navigate('CameraFeature', { cameraMode: CameraModeEnum.HealthCheck });
   };
   const pressHandlerCollection = () => {
     navigation.navigate('Collection');
@@ -74,11 +74,9 @@ const styles = StyleSheet.create({
     resizeMode: 'stretch',
   },
   mainContent: {
-    flex: 1,
+    flex: 1
   },
   contents: {
-    alignItems: 'center',
-    marginTop: 100,
   },
 
 
@@ -95,6 +93,7 @@ const styles = StyleSheet.create({
     color: 'black',
     fontWeight: 'bold',
     marginBottom: 15,
+    marginLeft: 10
   },
 
   body: {

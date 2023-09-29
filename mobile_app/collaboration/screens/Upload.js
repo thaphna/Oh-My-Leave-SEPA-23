@@ -9,7 +9,7 @@ export default function Upload({navigation, route}) {
   const { cameraMode } = route.params; 
   
   //replace below url with the actual EC2 url
-  const url = "https://b7de-121-200-5-225.ngrok-free.app/"
+  const url = "https://ccf1-121-200-5-225.ngrok-free.app/"
   const content_type = "image/jpeg";
 
   useEffect(() => {

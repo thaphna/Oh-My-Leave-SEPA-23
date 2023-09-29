@@ -54,7 +54,7 @@ export default function Profile({ navigation, route }) {
                 <Image source={require('../../assets/edit.png')} style={styles.edit} />
               </TouchableOpacity>
             </View>
-            <Text style={styles.profileDetect}>Dectect: 1</Text>
+            <Text style={styles.profileDetect}>Detect: 1</Text>
           </View>
         </View>
         <Text style={styles.profileTitle}>Quiz</Text>
@@ -174,7 +174,7 @@ const styles = StyleSheet.create({
   rectContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'left',
+    justifyContent: 'flex-start',
     marginTop: 10,
     backgroundColor: '#d3d3d3',
     paddingHorizontal: 10,
