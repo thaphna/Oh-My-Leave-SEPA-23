@@ -90,7 +90,8 @@ export default function Settings({navigation}){
 
 const styles = StyleSheet.create({
     settingsSection: {
-        flexDirection: 'column'
+        flexDirection: 'column',
+        marginTop: 60
     },
     settingsRow: {
         flexDirection: 'row'
@@ -109,7 +110,7 @@ const styles = StyleSheet.create({
         width: 75,
         height: 40,
         backgroundColor: "#B1F2B3",
-        marginTop: 100,
+        marginTop: 40,
         marginLeft: 25
     },
     text1: {

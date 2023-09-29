@@ -28,6 +28,7 @@ function Navigator() {
         <Stack.Screen name="Settings" component={Settings} options={{ headerShown: false}}/>
         <Stack.Screen name="NameChange" component={NameChange} options={{ headerShown: false}}/>
         <Stack.Screen name="Collection" component={Collection} options={{ headerShown: false}}/>
+        <Stack.Screen name="HealthResult" component={HealthResult} options={{ headerShown: false}}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

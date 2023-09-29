@@ -88,6 +88,7 @@ const styles = StyleSheet.create({
         height: 145,
         backgroundColor: 'green',
         marginBottom: 30,
+        zIndex: -1
     },
     cameraLabel: {
         color: 'black',
