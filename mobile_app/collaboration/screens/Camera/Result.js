@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Image, StyleSheet, ImageBackground, Text, TouchableOpacity, ScrollView } from 'react-native';
 
 export default function Result({navigation, route}){
+    const { imageUri } = route.params; // Retrieve the image URI passed as a parameter
     const { resultBody } = route.params; 
 
     const pressHandlerTakingPicture = () => {
@@ -26,9 +27,9 @@ export default function Result({navigation, route}){
                         <Text style={styles.text4}>Confidence: {data.confidence}%</Text>
                     </View>
                         <ScrollView style={styles.scrollViewCustom} horizontal={true}>
-                            <Image source={require('../assets/leave2.png')} style={styles.pic}/>
-                            <Image source={require('../assets/leave3.png')} style={styles.pic}/>
-                            <Image source={require('../assets/leave4.png')} style={styles.pic}/>
+                            <Image source={require('../../assets/leave2.png')} style={styles.pic}/>
+                            <Image source={require('../../assets/leave3.png')} style={styles.pic}/>
+                            <Image source={require('../../assets/leave4.png')} style={styles.pic}/>
                         </ScrollView>                               
                 </View>
             )
@@ -36,26 +37,26 @@ export default function Result({navigation, route}){
     }
 
 return (
-    <ImageBackground source={require('../assets/GreenBackground.png')} style={styles.background}>
+    <ImageBackground source={require('../../assets/GreenBackground.png')} style={styles.background}>
         <TouchableOpacity onPress={pressHandlerCameraPage}  style={styles.button}>
             <Text style={styles.text1}>BACK</Text>
         </TouchableOpacity>
         <View style={styles.resultHeading}> 
-            <Text style={styles.text2}>Result</Text>
-            { resultBody.length > 0 &&
-                <Image source={require('../assets/leave1.jpg')} style={styles.result}/>
-            }           
-        </View>
-        { resultBody.length > 0 &&
             <View>
-                <ScrollView style={styles.scrollView}>
-                    {mapResultList()}
-                </ScrollView>
+                <Text style={styles.text2}>Result</Text>
+                { resultBody[0].confidence < 50 &&
+                    <View style={styles.warningBox}>
+                        <Text style={styles.text5}>Low Confidence</Text>
+                    </View>
+                }
             </View>
-        }
-        { resultBody.length <= 0 &&
-            <Text style={styles.text3}>The image could not be successfully classified.</Text>
-        }
+            <Image source={{uri: imageUri}} style={styles.result}/>
+        </View>
+        <View>
+            <ScrollView style={styles.scrollView}>
+                {mapResultList()}
+            </ScrollView>
+        </View>
         
         
     </ImageBackground>
@@ -65,10 +66,18 @@ return (
 const styles = StyleSheet.create({
     resultHeading: {
         flexDirection: 'row',
+        marginTop: 40
     },
     container: {
         flex: 1,
         backgroundColor: '#F5F5F5',
+    },
+    warningBox: {
+        backgroundColor: 'yellow',
+        marginLeft: 25,
+        borderRadius: 10,
+        flexDirection: 'row',
+        flexWrap: 'wrap'
     },
     background: {
         flex: 1,
@@ -109,6 +118,12 @@ const styles = StyleSheet.create({
         fontSize: 15,
         marginTop: 25,
         marginRight: 10
+    },
+    text5: {
+        color: 'black',
+        fontWeight: 'bold',
+        fontSize: 15,
+        margin: 5,
     },
     result: {
         height: 120,
