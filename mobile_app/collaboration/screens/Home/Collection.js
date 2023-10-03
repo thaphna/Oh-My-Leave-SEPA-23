@@ -57,7 +57,7 @@ export default function HomePage({ navigation }) {
                             <TouchableOpacity style={styles.plusButton} onPress={pressHandlerHealth}>
                                 <Text style={styles.plusButtonText}>+</Text>
                             </TouchableOpacity>
-                        </View>                   
+                        </View>                
                         
 
                         <View style={styles.partBox}>
