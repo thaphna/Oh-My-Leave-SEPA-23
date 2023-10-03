@@ -1,10 +1,18 @@
+import React, { useRef } from 'react';
 import { Button, StyleSheet, Text, View, TouchableOpacity,Image, ImageBackground } from 'react-native';
 import MyBottomSheet from './MyBottomSheet.js';
-import RBSheet from 'react-native-raw-bottom-sheet'
+// import RBSheet from 'react-native-raw-bottom-sheet'
+// import { openCamera, openPicker } from 'react-native-image-crop-picker';
 
 
-export default function CollectionPage(){
+export default function CollectionPage({navigation}){
 
+    // const bottomSheetRef = useRef(null);
+    const pressHandlerBottomSheet = () =>{
+        navigation.navigate('MyBottomSheet');
+    }
+
+    
     return(
         <View style={styles.container}>      
         
@@ -12,16 +20,11 @@ export default function CollectionPage(){
                 <Text style={{fontWeight: 'bold'}}>BACK</Text>
             </TouchableOpacity> 
             <View style={{ flexDirection: 'row', marginRight:160, marginBottom:45, alignContent:"center"}}>
-                <Image source={require('../assets/icon.png')}  />
+                <Image source={require('../../assets/icon.png')}  />
                 <Text style={{fontWeight: 'bold'}}>User Name</Text>
             </View>
 
-            <View style={{ flexDirection: 'row'}}>        
-                <Text style={{fontWeight: 'bold', fontSize:25, marginRight:160}}>Collections</Text>
-                <TouchableOpacity style={{ width: 50, height: 50, backgroundColor: '#B1F2B3', borderRadius:10, justifyContent: 'center', alignItems: 'center' }}> 
-                <Text style={{fontWeight: 'bold', size: 50}}>+</Text>
-                </TouchableOpacity>
-            </View>
+            
             <MyBottomSheet/>
         </View>
     )

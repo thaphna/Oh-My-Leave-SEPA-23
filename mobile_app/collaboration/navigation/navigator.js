@@ -13,6 +13,11 @@ import Settings from '../screens/Settings';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import HealthResult from '../screens/Home/HealthResult';
 import Collection from '../screens/Home/Collection';
+import MyBottomSheet from "../screens/MyBottomSheet";
+import CollectionPage from "../screens/CollectionPage";
+import openPicker from "../screens/openPicker";
+
+
 const Stack = createStackNavigator();
 
 function Navigator() {
@@ -29,6 +34,9 @@ function Navigator() {
         <Stack.Screen name="NameChange" component={NameChange} options={{ headerShown: false}}/>
         <Stack.Screen name="Collection" component={Collection} options={{ headerShown: false}}/>
         <Stack.Screen name="HealthResult" component={HealthResult} options={{ headerShown: false}}/>
+        <Stack.Screen name="CollectionPage" component={CollectionPage} options={{ headerShown: false }} />
+        <Stack.Screen name="MyBottomSheet" component={MyBottomSheet} options={{ headerShown: false }} />
+        <Stack.Screen name="openPicker" component={openPicker} options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>
   );
