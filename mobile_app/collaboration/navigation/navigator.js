@@ -17,7 +17,6 @@ import LogIn from "../screens/LogIn";
 import SignUp from "../screens/SignUp";
 import HealthResult from '../screens/Home/HealthResult';
 import Collection from '../screens/Home/Collection';
-
 const Stack = createStackNavigator();
 
 function Navigator() {
@@ -40,6 +39,9 @@ function Navigator() {
         <Stack.Screen name="NameChange" component={NameChange} options={{ headerShown: false}}/>
         <Stack.Screen name="Collection" component={Collection} options={{ headerShown: false}}/>
         <Stack.Screen name="HealthResult" component={HealthResult} options={{ headerShown: false}}/>
+        <Stack.Screen name="CollectionPage" component={CollectionPage} options={{ headerShown: false }} />
+        <Stack.Screen name="MyBottomSheet" component={MyBottomSheet} options={{ headerShown: false }} />
+        <Stack.Screen name="openPicker" component={openPicker} options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>
   );
