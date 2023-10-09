@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { View, Image, ActivityIndicator, StyleSheet, Text, ImageBackground } from 'react-native';
+import { View, Image, ActivityIndicator, StyleSheet, Text, ImageBackground, Platform } from 'react-native';
 import * as FS from "expo-file-system";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { CameraModeEnum } from '../common/CameraModeEnum';
@@ -9,7 +9,7 @@ export default function Upload({navigation, route}) {
   const { cameraMode } = route.params; 
   
   //replace below url with the actual EC2 url
-  const url = "https://ccf1-121-200-5-225.ngrok-free.app/"
+  const url = "https://ee10-121-200-5-225.ngrok-free.app/"
   const content_type = "image/jpeg";
 
   useEffect(() => {
@@ -20,52 +20,99 @@ export default function Upload({navigation, route}) {
 
     const uploadImageForPrediction = async (storeKey, setValue) => {
       //get saved model name. If none selected yet, default to something
-      selectedModelName = null 
+      let selectedModelName = null 
 
-      try {
-        const savedValue = await AsyncStorage.getItem(storeKey)
-        if(savedValue === null) {
-          await AsyncStorage.setItem(storeKey, setValue)
-          selectedModelName = setValue
-        }          
-        else {
-          selectedModelName = savedValue
+      if (Platform.OS !== 'ios' && Platform.OS !== 'android') {
+        selectedModelName = 'spring' 
+      }
+      else {
+        try {
+          const savedValue = await AsyncStorage.getItem(storeKey)
+          if(savedValue === null) {
+            await AsyncStorage.setItem(storeKey, setValue)
+            selectedModelName = setValue
+          }          
+          else {
+            selectedModelName = savedValue
+          }
+        } catch (e) {
+          console.error("Failed to initialise settings. " + e)
         }
-      } catch (e) {
-        console.error("Failed to initialise settings. " + e)
+  
+        console.log("get saved  " + selectedModelName) 
       }
 
-      console.log("get saved  " + selectedModelName) 
-
       let fullUrl = url + "predict-plant";
-  
-      let response = await FS.uploadAsync(fullUrl, imageUri, {
-        headers: {
-          "content-type": content_type,
-          "model": selectedModelName
-        },
-        httpMethod: "POST",
-        uploadType: FS.FileSystemUploadType.BINARY_CONTENT,
-      });
 
-      console.log(JSON.parse(response.body))
-      navigation.navigate('Result', { resultBody: JSON.parse(response.body), imageUri: imageUri });
+      if (Platform.OS !== 'ios' && Platform.OS !== 'android') {
+        fullUrl = fullUrl += '-pc'
+
+        let response = await fetch(fullUrl, {
+          method: 'POST',
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            "model": selectedModelName
+          },
+          body: JSON.stringify({
+            img: imageUri
+          })
+        });
+
+        let jsonResult = await response.json()
+        console.log(jsonResult)
+        navigation.navigate('Result', { resultBody: jsonResult, imageUri: imageUri });
+      }
+      else {
+        let response = await FS.uploadAsync(fullUrl, imageUri, {
+          headers: {
+            "content-type": content_type,
+            "model": selectedModelName
+          },
+          httpMethod: "POST",
+          uploadType: FS.FileSystemUploadType.BINARY_CONTENT,
+        });
+
+        console.log(JSON.parse(response.body))
+        navigation.navigate('Result', { resultBody: JSON.parse(response.body), imageUri: imageUri });
+      }
     };
 
     const uploadImageForHealthCheck = async () => {
       let fullUrl = url + "health-check";
-  
-      let response = await FS.uploadAsync(fullUrl, imageUri, {
-        headers: {
-          "content-type": content_type,
-          "model": "health"
-        },
-        httpMethod: "POST",
-        uploadType: FS.FileSystemUploadType.BINARY_CONTENT,
-      });
+      
+      if (Platform.OS !== 'ios' && Platform.OS !== 'android') {
+        fullUrl = fullUrl += '-pc'
 
-      console.log(response.body)
-      navigation.navigate('HealthResult', { resultBody: JSON.parse(response.body), imageUri: imageUri });
+        let response = await fetch(fullUrl, {
+          method: 'POST',
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            "model": "health"
+          },
+          body: JSON.stringify({
+            img: imageUri
+          })
+        });
+  
+        let jsonResult = await response.json()
+        console.log(jsonResult)
+        navigation.navigate('HealthResult', { resultBody: jsonResult, imageUri: imageUri });
+      }
+      else {
+        let response = await FS.uploadAsync(fullUrl, imageUri, {
+          headers: {
+            "content-type": content_type,
+            "model": "health"
+          },
+          httpMethod: "POST",
+          uploadType: FS.FileSystemUploadType.BINARY_CONTENT,
+        });
+  
+        console.log(response.body)
+        navigation.navigate('HealthResult', { resultBody: JSON.parse(response.body), imageUri: imageUri });
+      }      
     };
     
     if (cameraMode === CameraModeEnum.Prediction) {

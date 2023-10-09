@@ -159,7 +159,6 @@ const styles = StyleSheet.create({
     subTitle: {
         fontSize: 14,
         fontWeight: 'bold',
-        marginLeft: 20,
         marginTop: 10,
         justifyContent: 'center',
         alignItems: 'center',

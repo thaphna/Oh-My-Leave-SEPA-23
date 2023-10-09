@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, Button, ImageBackground, Text, Image, TextInput, TouchableOpacity } from 'react-native';
 import NavBarProfile from '../navBar/NavBarProfile';
+import { ParentPageEnum } from '../../common/ParentPageEnum';
 
 export default function Profile({ navigation, route }) {
 
@@ -17,7 +18,7 @@ export default function Profile({ navigation, route }) {
   };
 
   const pressHandlerSettings = () => {
-    navigation.navigate('Settings');
+    navigation.navigate('Settings', { settingParentPage: ParentPageEnum.ProfilePage });
   };
 
   const pressHandlerNameChange = () => {

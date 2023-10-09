@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { View, Image, StyleSheet, ImageBackground, Text, TouchableOpacity, ScrollView } from 'react-native';
+import { View, Image, StyleSheet, ImageBackground, Text, TouchableOpacity, ScrollView, Platform } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import DropDownPicker from 'react-native-dropdown-picker';
+import { ParentPageEnum } from '../common/ParentPageEnum';
 
-export default function Settings({navigation}){
+export default function Settings({navigation, route }){
+    const { settingParentPage } = route.params; 
+
+
     const [ready, setReady] = useState(false);
     const [open, setOpen] = useState(false);
     const [value, setValue] = useState(null);
@@ -14,21 +18,35 @@ export default function Settings({navigation}){
         {label: 'Winter', value: 'winter'}
     ]);
 
-    const pressHandlerCameraPage = () => {
-        navigation.navigate('CameraPage');
+    const pressHandlerBackFromSettings = () => {
+        if (settingParentPage === ParentPageEnum.CameraPage) {
+            navigation.navigate('CameraPage');
+        }
+        else if (settingParentPage === ParentPageEnum.HomePage) {
+            navigation.navigate('HomePage');
+        }
+        else if (settingParentPage === ParentPageEnum.ProfilePage) {
+            navigation.navigate('Profile');
+        }
     };
 
     useEffect(() => {
         console.log("initialise settings page")    
-        
-        const getSavedSelectedModelName = async (storeKey, defaultValue) => {
-            savedSelectedModel = await getData(storeKey, defaultValue)
-            console.log("got data " + savedSelectedModel)  
+        if (Platform.OS === 'ios' || Platform.OS === 'android') {
+            const getSavedSelectedModelName = async (storeKey, defaultValue) => {
+                savedSelectedModel = await getData(storeKey, defaultValue)
+                console.log("got data " + savedSelectedModel)  
+                setReady(true)
+                setValue(savedSelectedModel)
+            }
+
+            getSavedSelectedModelName('SelectedModel', 'summer')
+        }
+        else {
+            let savedSelectedModel = 'spring'
             setReady(true)
             setValue(savedSelectedModel)
         }
-
-        getSavedSelectedModelName('SelectedModel', 'summer')
     }, [navigation]);
 
 
@@ -63,13 +81,13 @@ export default function Settings({navigation}){
     
     return (
         <ImageBackground source={require('../assets/GreenBackground.png')} style={styles.background}>
-            <TouchableOpacity onPress={pressHandlerCameraPage} style={styles.button}>
+            <TouchableOpacity onPress={pressHandlerBackFromSettings} style={styles.button}>
                 <Text style={styles.text1}>BACK</Text>
             </TouchableOpacity>
             <View style={styles.settingsSection}>
                 <Text style={styles.text2}>Settings</Text>
                 <View style={styles.settingsRow}>
-                    <Text style={styles.text3}>Model</Text>
+                    <Text style={styles.text3}>Current season:</Text>
                     <DropDownPicker  style={styles.dropdown}
                         open={open}
                         value={value}
@@ -100,7 +118,7 @@ const styles = StyleSheet.create({
         backgroundColor: "#ffffff",
         marginTop: 20,
         marginLeft: 20,
-        width: 200
+        width: 100
     },
     background: {
         flex: 1,
@@ -125,6 +143,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         fontSize: 40,
         marginTop: 30,
+        marginBottom: 30,
         marginLeft: 25
     },
     text3: {
@@ -132,7 +151,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         fontSize: 20,
         alignSelf: 'center',
-        marginTop: 10,
+        marginTop: 20,
         marginLeft: 25
     }
 });

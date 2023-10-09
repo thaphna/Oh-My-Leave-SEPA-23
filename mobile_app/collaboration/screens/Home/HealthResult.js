@@ -38,7 +38,8 @@ return (
                 </View>
             }
         </View>        
-        <Text style={styles.text3}>Confidence: {resultBody[0].confidence}</Text>
+        <Text style={styles.text3}>*Plant health prediction is based on abnormality of shape or characteristics of diseases.</Text>
+        <Text style={styles.text3}>Old/yellow leaves may not be recognised as unhealthy.</Text>
     </ImageBackground>
   );
 };
@@ -65,7 +66,7 @@ const styles = StyleSheet.create({
         marginRight: 25,
         marginLeft: 25,
         marginTop: 10,
-        marginBottom: 10,
+        marginBottom: 40,
         height: 100,
         alignContent: 'center',
         alignItems: 'center',
@@ -101,15 +102,15 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         fontSize: 25,
         marginTop: 30,
-        marginLeft: 25
+        marginLeft: 25,
+        marginBottom: 20
     },
     text3: {
         color: 'black',
         fontWeight: 'bold',
         fontSize: 15,
         marginLeft: 30,
-        marginTop: 25,
-        flex: 2
+        color: '#454545'
     },
     healthText: {
         color: 'black',

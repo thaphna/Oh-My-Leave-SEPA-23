@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Image, StyleSheet, ImageBackground, Text, TouchableOpacity } from 'react-native';
 import { CameraModeEnum } from '../../common/CameraModeEnum';
+import { ParentPageEnum } from '../../common/ParentPageEnum';
 import NavBarCamera from '../navBar/NavBarCamera';
 
 export default function CameraPage({ navigation }) {
@@ -21,7 +22,7 @@ export default function CameraPage({ navigation }) {
     };
 
     const pressHandlerSettings = () => {
-        navigation.navigate('Settings');
+        navigation.navigate('Settings', { settingParentPage: ParentPageEnum.CameraPage });
     };
 
     return (

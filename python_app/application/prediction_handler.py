@@ -22,7 +22,7 @@ class predictionHandler:
       item.confidence = round(item.confidence, 2)
       item.plantName = item.plantName.capitalize()
 
-    filteredResult = list(filter(lambda x: x.confidence > 50, result))
+    filteredResult = list(filter(lambda x: x.confidence > 0, result))
 
     if len(filteredResult) <= 0:
       return [max(result, key = lambda x : x.confidence)]
