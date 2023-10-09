@@ -2,6 +2,8 @@ import React from 'react';
 import { StyleSheet, View, Button, ImageBackground, Text, Image, Alert, Pressable, useWindowDimensions, SafeAreaView, TouchableOpacity } from 'react-native';
 import NavBarHome from '../navBar/NavBarHome';
 import { CameraModeEnum } from '../../common/CameraModeEnum';
+import { ParentPageEnum } from '../../common/ParentPageEnum';
+
 export default function HomePage({ navigation }) {
   const pressHandlerHomePage = () => {
     navigation.navigate("HomePage");
@@ -15,7 +17,7 @@ export default function HomePage({ navigation }) {
     navigation.navigate('Profile');
   };
   const pressHandlerSettings = () => {
-    navigation.navigate('Settings');
+    navigation.navigate('Settings', { settingParentPage: ParentPageEnum.HomePage });
   };
   const pressHandlerHealth = () => {
     navigation.navigate('CameraFeature', { cameraMode: CameraModeEnum.HealthCheck });
@@ -102,10 +104,12 @@ const styles = StyleSheet.create({
 
   partBox: {
     backgroundColor: '#D9D9D9',
-    width: 358,
     height: 100,
     flexDirection: 'row',
     alignItems: 'center',
+    marginLeft: 10,
+    marginRight: 10,
+    borderRadius: 5
   },
 
   collectionImage: {
@@ -115,7 +119,6 @@ const styles = StyleSheet.create({
   },
 
   health: {
-    marginBottom: 205,
     marginTop: 8
   },
 
@@ -144,9 +147,4 @@ const styles = StyleSheet.create({
     height: 25,
     alignSelf: 'center'
   },
-
-
-
-
-
 });

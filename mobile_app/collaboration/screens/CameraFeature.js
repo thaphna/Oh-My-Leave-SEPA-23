@@ -1,17 +1,24 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Text, View, StyleSheet, TouchableOpacity, Image} from 'react-native';
+import { Text, View, StyleSheet, TouchableOpacity, Image, Platform} from 'react-native';
 import Constants from 'expo-constants';
 import { Camera, CameraType } from 'expo-camera';
 import * as MediaLibrary from 'expo-media-library';
 import * as ImagePicker from 'expo-image-picker'
 import Button from './Button';
 import { style } from 'deprecated-react-native-prop-types/DeprecatedImagePropType';
+import { CameraModeEnum } from '../common/CameraModeEnum';
 
 export default function CameraFeature({navigation, route}){
     const { cameraMode } = route.params; 
 
-    const pressHandlerCameraPage = () => {
-        navigation.navigate('CameraPage');
+    const pressHandlerBackButton = () => {
+        if (cameraMode === CameraModeEnum.Prediction) {
+            navigation.navigate('CameraPage');
+        }
+        else if (cameraMode === CameraModeEnum.HealthCheck) {
+            navigation.navigate('HomePage');
+        }
+        
     };
 
     const handlerUploadPage = (route) => {
@@ -38,6 +45,7 @@ export default function CameraFeature({navigation, route}){
         if (cameraRef) {
             try {
                 const data = await cameraRef.current.takePictureAsync();
+                console.log('Take picture');
                 console.log(data);
                 setImage(data.uri);
             } catch (error) {
@@ -49,11 +57,15 @@ export default function CameraFeature({navigation, route}){
     const savePicture = async () => {
         if(image) {
             try {
-                const asset = await MediaLibrary.createAssetAsync(image);
-                //alert('Saved');
                 setImage(null);
                 console.log('Saved Successfully');
-                handlerUploadPage({ imageUri: asset.uri, cameraMode: cameraMode });
+                if (Platform.OS === 'ios' || Platform.OS === 'android') {
+                    const asset = await MediaLibrary.createAssetAsync(image);
+                    handlerUploadPage({ imageUri: asset.uri, cameraMode: cameraMode });
+                }
+                else {
+                    handlerUploadPage({ imageUri: image, cameraMode: cameraMode });
+                }
             } catch (error) {
                 console.log(error);
             }
@@ -70,7 +82,7 @@ export default function CameraFeature({navigation, route}){
             quality: 1,
         });
     
-        console.log(result);
+        console.log(result.uri);
     
         //do we really need to save to phone gallery again on an image we selected and crop?
         if (!result.cancelled) {
@@ -80,7 +92,7 @@ export default function CameraFeature({navigation, route}){
         handlerUploadPage({ imageUri: result.uri, cameraMode: cameraMode });
     };
 
-    if (hasCameraPermission === false) {
+    if (hasCameraPermission === false && Platform.OS !== 'ios' && Platform.OS !== 'android') {
         return <Text>Can't Access to the Camera</Text>;
     }
 
@@ -116,7 +128,7 @@ export default function CameraFeature({navigation, route}){
                     </View>
                 ) : (
                     <View style={styles.buttonContainer}>
-                        <TouchableOpacity onPress={pressHandlerCameraPage}> 
+                        <TouchableOpacity onPress={pressHandlerBackButton}> 
                         <Text  style={styles.text1}>Cancel</Text>
                         </TouchableOpacity>
     

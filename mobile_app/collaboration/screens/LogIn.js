@@ -61,7 +61,7 @@ export default function LogIn(){
             
             <SafeAreaView>
 
-                <Text style={styles.title}>Welcome Back !</Text>
+                <Text style={styles.title}>Welcome Back!</Text>
 
                 <Text style={styles.subTitle}>Log In</Text>
 
@@ -185,7 +185,7 @@ const styles = StyleSheet.create({
     },
     body: {
        // margin: 12,
-        marginTop: 260,
+        marginTop: 100,
         //borderWidth: 1,
         padding: 20,
        // justifyContent: 'center',

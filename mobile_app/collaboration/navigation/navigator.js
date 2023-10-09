@@ -10,6 +10,7 @@ import Profile from '../screens/Profile/Profile';
 import NameChange from '../screens/Profile/NameChange';
 import CameraFeature from '../screens/CameraFeature';
 import Settings from '../screens/Settings';
+import CollectionPage from '../screens/CollectionPage';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 //import HealthResult from '../screens/HealthResult';
@@ -40,8 +41,6 @@ function Navigator() {
         <Stack.Screen name="Collection" component={Collection} options={{ headerShown: false}}/>
         <Stack.Screen name="HealthResult" component={HealthResult} options={{ headerShown: false}}/>
         <Stack.Screen name="CollectionPage" component={CollectionPage} options={{ headerShown: false }} />
-        <Stack.Screen name="MyBottomSheet" component={MyBottomSheet} options={{ headerShown: false }} />
-        <Stack.Screen name="openPicker" component={openPicker} options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>
   );
