@@ -7,8 +7,8 @@ import sys
 import os.path
 
 from tensorflow import keras
-from tensorflow.keras import layers
-from tensorflow.keras.models import Sequential
+from keras import layers
+from keras.models import Sequential
 
 def trainModel(data_dir, img_height, img_width, batch_size, epochs, model_name):
 	train_ds = tf.keras.utils.image_dataset_from_directory(
@@ -47,12 +47,10 @@ def trainModel(data_dir, img_height, img_width, batch_size, epochs, model_name):
 
 	data_augmentation = keras.Sequential(
 		[
-			layers.RandomFlip("horizontal",
-												input_shape=(img_height,
-																		img_width,
-																		3)),
-			layers.RandomRotation(0.1),
-			layers.RandomZoom(0.1),
+			layers.RandomFlip("horizontal_and_vertical", input_shape=(img_height,img_width,3)),
+			layers.RandomRotation(0.2),
+			layers.RandomZoom(0.2),
+			layers.RandomContrast(0.2),
 		]
 	)
 	model = Sequential([
